@@ -12,9 +12,7 @@ public class WebConfig implements WebMvcConfigurer {
                 .allowedOrigins("https://polite-water-0d3e2c61e.1.azurestaticapps.net",
                                 "http://localhost:4200"
                 ) 
-
                 .allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS")
-                .allowedHeaders("*")
                 .allowCredentials(true);
     }
 } 
