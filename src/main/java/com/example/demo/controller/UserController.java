@@ -46,7 +46,7 @@ public ResponseEntity<?> register(@RequestBody UserRegistrationRequest registrat
                     .body(new ErrorResponse(e.getMessage()));
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
-                    .body(new ErrorResponse("An error occurred during registration"));
+            .body(new ErrorResponse("Chi tiết lỗi: " + e.getMessage()));
         }
 }
 
