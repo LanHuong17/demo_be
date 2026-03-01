@@ -46,7 +46,7 @@ public ResponseEntity<?> register(@RequestBody UserRegistrationRequest registrat
                     .body(new ErrorResponse(e.getMessage()));
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
-            .body(new ErrorResponse("Chi tiết lỗi: " + e.toString()));
+            .body(new ErrorResponse("Lỗi thực tế: " + e.getMessage()));
         }
 }
 
