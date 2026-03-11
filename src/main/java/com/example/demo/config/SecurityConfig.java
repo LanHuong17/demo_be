@@ -19,6 +19,7 @@ public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         .cors(cors -> cors.disable())
         .authorizeHttpRequests(auth -> auth
             .requestMatchers("/api/users/register", "/error").permitAll() 
+            .requestMatchers("/api/test/**").permitAll()
             .anyRequest().authenticated()
         )
         .httpBasic(basic -> basic.disable())
