@@ -1,4 +1,4 @@
-package com.example.demo.dto;
+package com.example.demo.dto.respone;
 
 public class UserResponse {
     private Integer id;

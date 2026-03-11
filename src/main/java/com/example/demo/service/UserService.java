@@ -1,43 +1,41 @@
 package com.example.demo.service;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.example.demo.repository.UserRepository;
+import com.example.demo.utils.Messages;
+
+import jakarta.transaction.Transactional;
+import lombok.RequiredArgsConstructor;
+
+import com.example.demo.dto.request.UserRegistrationRequest;
 import com.example.demo.entity.User;
+import com.example.demo.exception.DemoException;
 
 @Service
+@RequiredArgsConstructor
 public class UserService {
 
-    @Autowired
-    private UserRepository userRepository;
+    private final UserRepository userRepository;
+    private final PasswordEncoder passwordEncoder; 
 
-    public User registerUser(String username, String email, String password) {
-        // Validate input
-        if (username == null || username.trim().isEmpty()) {
-            throw new IllegalArgumentException("Username must not be empty");
-        }
-        if (email == null || email.trim().isEmpty()) {
-            throw new IllegalArgumentException("Email must not be empty");
-        }
-        if (password == null || password.trim().isEmpty()) {
-            throw new IllegalArgumentException("Password must not be empty");
-        }
+    @Transactional
+    public User registerUser(UserRegistrationRequest request) {
         
-        // Check if user already exists
-        if (userRepository.findByUsername(username) != null) {
-            throw new IllegalArgumentException("Username already exists");
+        if (userRepository.findByUsername(request.getUsername()) != null) {
+            throw new DemoException("USR_001", Messages.USER_ALREADY_EXISTS);
         }
-        if (userRepository.findByEmail(email) != null) {
-            throw new IllegalArgumentException("Email already exists");
-        }
-        
-        // Create and save new user
+
         User user = new User();
-        user.setUsername(username);
-        user.setEmail(email);
-        user.setPassword(password);
+        user.setUsername(request.getUsername());
+        user.setEmail(request.getEmail());
+        
+        String encodedPassword = passwordEncoder.encode(request.getPassword());
+        user.setPassword(encodedPassword); 
         
         return userRepository.save(user);
     }
-    
 }
+    
+
