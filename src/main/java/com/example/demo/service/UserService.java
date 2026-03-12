@@ -4,12 +4,14 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.example.demo.repository.UserRepository;
+import com.example.demo.utils.GenerateResponse;
 import com.example.demo.utils.Messages;
 
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 
 import com.example.demo.dto.request.UserRegistrationRequest;
+import com.example.demo.dto.respone.DemoResponseEntity;
 import com.example.demo.entity.User;
 import com.example.demo.exception.DemoException;
 

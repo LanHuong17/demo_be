@@ -14,6 +14,10 @@ public class DemoResponseEntity {
         this.response = "";
     }
 
+    public DemoResponseEntity(Object response) {
+        this.response = response;
+    }
+
     public DemoResponseEntity(String status, String code, Object response) {
         this.status = status;
         this.code = code;

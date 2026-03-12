@@ -9,12 +9,8 @@ public class GenerateResponse {
     
     public static ResponseEntity<DemoResponseEntity> generateResponse(boolean hasNoError, Object response, HttpStatus statusCode) {
         DemoResponseEntity demoResponseEntity = new DemoResponseEntity(hasNoError, "", response);
-        
-        if (!hasNoError) {
-            demoResponseEntity.setCode("ERR_500"); 
-        } else {
-            demoResponseEntity.setCode("200");
-        }
+        String code = String.valueOf(statusCode.value());
+        demoResponseEntity.setCode(hasNoError ? code : "ERR_" + code);
         
         return new ResponseEntity<>(demoResponseEntity, statusCode);
     }
