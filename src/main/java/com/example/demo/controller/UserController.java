@@ -24,7 +24,8 @@ import com.example.demo.entity.User;
 @RequiredArgsConstructor
 public class UserController {
 
-    private final UserService userService;
+    @Autowired
+    private UserService userService;
 
     @PostMapping("/register")
     public ResponseEntity<DemoResponseEntity> register(@Valid @RequestBody UserRegistrationRequest request) {
